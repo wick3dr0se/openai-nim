@@ -30,5 +30,5 @@ var ai = newAIClient(getEnv("AI_TOKEN")
 
 Text chat with openai
 ```nim
-waitFor ai.chat("Say 'test'")
+echo waitFor ai.chat("Say 'test'")
 ```
