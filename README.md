@@ -17,10 +17,10 @@ git clone https://github.com/wick3dr0se/openai-nim; cd openai-nim
 ## Getting Started
 
 ```nim
-# from nible
+# from nimble
 import openai
 # or from source
-import ./openai-nim
+import ./openai
 ```
 
 Start an asynchronous OpenAI client
