@@ -29,7 +29,7 @@ proc newAIClient*(key: string): AsyncHttpClient =
     })
   )
 
-proc chat*(client: AsyncHttpClient, text: string, model = "gpt-3.5-turbo", temperature = 1.0, role = "user") {.async.} =
+proc chat*(client: AsyncHttpClient, text: string, model = "gpt-3.5-turbo", temperature = 1.0, role = "user"): Future[string] {.async.} =
   let
     body = %*{
       "model": model,
@@ -43,4 +43,4 @@ proc chat*(client: AsyncHttpClient, text: string, model = "gpt-3.5-turbo", tempe
     jsonObject = parseJson(await response.body)
     c = to(jsonObject, Completion)
   
-  echo c.choices[0].message.content
+  return c.choices[0].message.content
