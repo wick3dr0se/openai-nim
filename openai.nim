@@ -19,7 +19,12 @@ type
     completion_tokens: int
     total_tokens: int
 
-const api = "https://api.openai.com/v1/chat/completions"
+type
+  Image = object
+    created: int
+    data: seq[Data]
+  Data = object
+    url: string
 
 proc newAIClient*(key: string): AsyncHttpClient =
   return newAsyncHttpClient(
@@ -39,8 +44,37 @@ proc chat*(client: AsyncHttpClient, text: string, model = "gpt-3.5-turbo", tempe
         "content": text
       }]
     }
-    response = await client.request(api, httpMethod = HttpPost, body = $body)
+    response = await client.request(
+      "https://api.openai.com/v1/chat/completions",
+      httpMethod = HttpPost, body = $body
+    )
     jsonObject = parseJson(await response.body)
     c = to(jsonObject, Completion)
   
   return c.choices[0].message.content
+
+proc imageGen*(client: AsyncHttpClient, prompt: string, size = "256x256"): Future[string] {.async.} =
+  let
+    body = %*{
+      "prompt": prompt,
+      #"n": 1,
+      "size": size,
+      #"response_format": "url"
+    }
+    response = await client.request(
+      "https://api.openai.com/v1/images/generations",
+      httpMethod = HttpPost, body = $body
+    )
+    jsonObject = parseJson(await response.body)
+    i = to(jsonObject, Image)
+    
+  return i.data[0].url
+  #[ ERR RESPONSE
+    {
+  "error": {    "code": null,
+    "message": "'256\u00d7256' is not one of ['256x256', '512x512', '1024x1024'] - 'size'",
+    "param": null,
+    "type": "invalid_request_error"
+  }
+  }
+  ]#
