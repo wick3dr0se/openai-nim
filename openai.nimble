@@ -1,6 +1,6 @@
 author = "wick3dr0se"
 
-version = "0.0.1"
+version = "0.0.2"
 
 description = "An OpenAI API module for Nim"
 
