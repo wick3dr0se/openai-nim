@@ -6,7 +6,7 @@
 ## Acquisition
 Install with Nimble
 ```bash
-nimble install https://github.com/wick3dr0se/openai-nim
+nimble install https://github.com/wick3dr0se/openai-nim@#head
 ```
 
 Install from source
