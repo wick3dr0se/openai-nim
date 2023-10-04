@@ -25,10 +25,15 @@ import ./openai
 
 Start an asynchronous OpenAI client
 ```nim
-var ai = newAIClient(getEnv("AI_TOKEN")
+var ai = newAIClient(getEnv("AI_KEY")
 ```
 
-Text chat with openai
+Text chat with OpenAI
 ```nim
 echo waitFor ai.chat("Say 'test'")
+```
+
+Generate an image with DALL-E
+```nim
+echo waitFor ai.imageGen("Puppy")
 ```
