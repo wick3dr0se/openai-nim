@@ -1,6 +1,6 @@
 <div align="center">
 <h1>OpenAI-Nim</h1>
-<p>An OpenAI API module for Nim</p>
+<p>OpenAI API for Nim</p>
 </div>
 
 ## Acquisition
@@ -15,7 +15,7 @@ git clone https://github.com/wick3dr0se/openai-nim; cd openai-nim
 ```
 
 ## Getting Started
-
+Import openai module
 ```nim
 # from nimble
 import openai
